@@ -26,4 +26,9 @@ internal class DollarTest {
         val ten = Dollar(5) * 2
         ten shouldBe Dollar(10)
     }
+
+    @Test
+    fun `5 USD is not 5 CHF`() {
+        Dollar(5) shouldNotBe Franc(5)
+    }
 }
