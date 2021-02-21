@@ -8,22 +8,22 @@ internal class FrancTest {
 
     @Test
     fun `5 CHF has amount of 5`() {
-        Franc(5).amount shouldBe 5
+        Money.franc(5).amount shouldBe 5
     }
 
     @Test
     fun `10 CHF is 10 CHF`() {
-        Franc(10) shouldBe Franc(10)
+        Money.franc(10) shouldBe Money.franc(10)
     }
 
     @Test
     fun `10 CHF is not 5 CHF`() {
-        Franc(10) shouldNotBe Franc(5)
+        Money.franc(10) shouldNotBe Money.franc(5)
     }
 
     @Test
     fun `5 CHF multiply 2 is 10 CHF`() {
-        val ten = Franc(5) * 2
-        ten shouldBe Franc(10)
+        val ten = Money.franc(5) * 2
+        ten shouldBe Money.franc(10)
     }
 }

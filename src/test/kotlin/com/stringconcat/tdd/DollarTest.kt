@@ -8,27 +8,27 @@ internal class DollarTest {
 
     @Test
     fun `5 USD has amount of 5`() {
-        Dollar(5).amount shouldBe 5
+        Money.dollar(5).amount shouldBe 5
     }
 
     @Test
     fun `10 Usd is 10 USD`() {
-        Dollar(10) shouldBe Dollar(10)
+        Money.dollar(10) shouldBe Money.dollar(10)
     }
 
     @Test
     fun `10 Usd is not 5 USD`() {
-        Dollar(10) shouldNotBe Dollar(5)
+        Money.dollar(10) shouldNotBe Money.dollar(5)
     }
 
     @Test
     fun `5 dollar multiply 2 is 10 USD`() {
-        val ten = Dollar(5) * 2
-        ten shouldBe Dollar(10)
+        val ten = Money.dollar(5) * 2
+        ten shouldBe Money.dollar(10)
     }
 
     @Test
     fun `5 USD is not 5 CHF`() {
-        Dollar(5) shouldNotBe Franc(5)
+        Money.dollar(5) shouldNotBe Money.franc(5)
     }
 }

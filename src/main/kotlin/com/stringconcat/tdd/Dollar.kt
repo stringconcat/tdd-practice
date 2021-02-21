@@ -1,8 +1,8 @@
 package com.stringconcat.tdd
 
-class Dollar(
-    val amount: Int
-) {
+class Dollar internal constructor(
+    amount: Int
+): Money(amount = amount) {
 
     override fun equals(other: Any?): Boolean {
         if (other !is Dollar) return false
@@ -12,5 +12,9 @@ class Dollar(
 
     operator fun times(multiplier: Int): Dollar {
         return Dollar(amount * multiplier)
+    }
+
+    override fun toString(): String {
+        return "Dollar($amount)"
     }
 }
