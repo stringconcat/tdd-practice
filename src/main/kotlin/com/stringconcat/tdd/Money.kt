@@ -3,7 +3,7 @@ package com.stringconcat.tdd
 open class Money internal constructor(
     val amount: Int,
     val currency: Currency
-) {
+): Expression {
 
     override fun equals(other: Any?): Boolean {
         if (other !is Money) return false

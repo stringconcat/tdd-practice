@@ -62,4 +62,7 @@ internal class MoneyTest {
     fun `Franc has currency of CHF`() {
         Money.franc(1).currency shouldBe Money.Currency.CHF
     }
+
+    // либо делать конвертацию 1 доллар = 2 франка
+    // либо делать сложение 2х одинаковых валют
 }
