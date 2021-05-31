@@ -15,7 +15,17 @@ class Wallet(vararg val money: Money) {
     }
 
     fun asDollars(rate: Double): Money {
-        return Money.dollar((money.first().amount / rate).roundToInt())
+        return Money.dollar(sumAmount(Money.Currency.USD, money, rate))
+    }
+
+    private fun sumAmount(currency: Money.Currency, money: Array<out Money>, rate: Double): Int {
+        var sumAmount = 0
+        money.forEach { m -> if (m.currency == currency) sumAmount += m.amount else sumAmount += (m.amount / rate).roundToInt() }
+        return sumAmount
+    }
+
+    fun asFranc(rate: Double): Any {
+        return Money.franc(sumAmount(Money.Currency.CHF, money, rate))
     }
 
 }
