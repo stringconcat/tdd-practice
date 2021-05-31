@@ -28,4 +28,29 @@ internal class WalletTest {
     fun `wallet that contains 2 CHF and 1 USD returns 2 USD if rate 2 to 1`() {
         Wallet(Money.franc(2), Money.dollar(1)).asDollars(2.0) shouldBe Money.dollar(2)
     }
+
+    @Test
+    fun `wallet that contains 3 CHF returns 1 EUR if rate 3 to 1`() {
+        Wallet(Money.franc(3)).asEuro(3.0) shouldBe Money.euro(1)
+    }
+
+    @Test
+    fun `wallet that contains 6 USD returns 3 EUR if rate 2 to 1`() {
+        Wallet(Money.dollar(6)).asEuro(2.0) shouldBe Money.euro(3)
+    }
+
+    @Test
+    fun `wallet that contains 3 EUR returns 6 USD if rate 1 to 2`() {
+        Wallet(Money.euro(3)).asDollars(0.5) shouldBe Money.dollar(6)
+    }
+
+    @Test
+    fun `wallet that contains 3 EUR returns 6 CHF if rate 1 to 2`() {
+        Wallet(Money.euro(3)).asFranc(0.5) shouldBe Money.franc(6)
+    }
+
+    @Test
+    fun `wallet that contains 3 EUR returns 3 EUR if rate 1 to 1`() {
+        Wallet(Money.euro(3)).asEuro(1.0) shouldBe Money.euro(3)
+    }
 }

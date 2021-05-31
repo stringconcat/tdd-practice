@@ -10,6 +10,7 @@ open class Money(
     companion object {
         fun dollar(amount: Int) = Money(amount, Currency.USD)
         fun franc(amount: Int) = Money(amount, Currency.CHF)
+        fun euro(amount: Int) = Money(amount, Currency.EUR)
     }
 
     operator fun plus(other: Money): Wallet {
@@ -34,6 +35,6 @@ open class Money(
     }
 
     enum class Currency {
-        USD, CHF
+        USD, CHF, EUR
     }
 }

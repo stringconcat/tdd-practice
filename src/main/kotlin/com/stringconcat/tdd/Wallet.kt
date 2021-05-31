@@ -3,8 +3,6 @@ package com.stringconcat.tdd
 import kotlin.math.roundToInt
 
 class Wallet(vararg val money: Money) {
-
-
     override fun equals(other: Any?): Boolean {
         if (other !is Wallet) return false
         return this.money.contentEquals(other.money)
@@ -28,4 +26,7 @@ class Wallet(vararg val money: Money) {
         return Money.franc(sumAmount(Money.Currency.CHF, money, rate))
     }
 
+    fun asEuro(rate: Double): Any {
+        return Money.euro(sumAmount(Money.Currency.EUR, money, rate))
+    }
 }
