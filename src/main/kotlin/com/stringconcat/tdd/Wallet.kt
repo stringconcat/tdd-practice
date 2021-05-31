@@ -1,5 +1,6 @@
 package com.stringconcat.tdd
 
+import java.util.function.Consumer
 import kotlin.math.roundToInt
 
 class Wallet(vararg val money: Money) {
@@ -22,11 +23,37 @@ class Wallet(vararg val money: Money) {
         return sumAmount
     }
 
-    fun asFranc(rate: Double): Any {
+    fun asFranc(rate: Double): Money {
         return Money.franc(sumAmount(Money.Currency.CHF, money, rate))
     }
 
-    fun asEuro(rate: Double): Any {
+    fun asEuro(rate: Double): Money {
         return Money.euro(sumAmount(Money.Currency.EUR, money, rate))
+    }
+
+    operator fun plus(other: Wallet): Wallet {
+        var allMoney = mutableListOf<Money>()
+        this.money.forEach { m -> plus(allMoney, m) }
+        other.money.forEach { m -> plus(allMoney, m) }
+        return Wallet(*allMoney.toTypedArray())
+    }
+
+    fun plus(allMoney: MutableList<Money>, money: Money) {
+        var oldAmount = 0
+        var idx = -1
+        for ((i, m) in allMoney.iterator().withIndex()) {
+            if (m.currency == money.currency) {
+                oldAmount += m.amount
+                idx = i
+                break
+            }
+        }
+
+        if (idx == -1) {
+            allMoney.add(money)
+            return
+        }
+
+        allMoney.set(idx, Money(oldAmount + money.amount, money.currency))
     }
 }

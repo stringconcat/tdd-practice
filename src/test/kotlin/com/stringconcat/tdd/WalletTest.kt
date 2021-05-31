@@ -53,4 +53,9 @@ internal class WalletTest {
     fun `wallet that contains 3 EUR returns 3 EUR if rate 1 to 1`() {
         Wallet(Money.euro(3)).asEuro(1.0) shouldBe Money.euro(3)
     }
+
+    @Test
+    fun `wallet that contains 3 USD and 3 CHF + wallet that contains 3 CHF retutn wallet that contains 3 USD and 6 CHF`() {
+        Wallet(Money.dollar(3), Money.franc(3)) + Wallet(Money.franc(3)) shouldBe Wallet(Money.dollar(3), Money.franc(6))
+    }
 }
