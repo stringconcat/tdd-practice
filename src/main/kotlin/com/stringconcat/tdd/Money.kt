@@ -1,17 +1,22 @@
 package com.stringconcat.tdd
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 open class Money(
-    val amount: Int,
+    amount: BigDecimal,
     val currency: Currency
-    ) {
+) {
+    private val amount = amount.setScale(2, RoundingMode.HALF_EVEN);
+
 
     override fun equals(other: Any?): Boolean {
         if (other !is Money) return false
-        return this.currency == other.currency && this.amount == other.amount
+        return this.currency == other.currency && this.amount.compareTo(other.amount) == 0
     }
 
     operator fun times(multiplier: Int): Money {
-        return Money(amount * multiplier, this.currency)
+        return Money(amount.multiply(BigDecimal.valueOf(multiplier.toLong())), this.currency)
     }
 
     operator fun plus(other: Money): Money {
@@ -22,14 +27,13 @@ open class Money(
         return "Money(amount=$amount, currency=$currency)"
     }
 
-    fun toFranc(): Money {
-        if (currency == Currency.CHF) return this
-        return Money(amount * 2, Currency.CHF)
+    fun convert(rate: BigDecimal, currency: Currency): Money {
+        return Money(amount.multiply(rate).setScale(2, RoundingMode.HALF_EVEN), currency)
     }
 
     companion object {
-        fun dollar(amount: Int) = Money(amount, Currency.USD)
-        fun franc(amount: Int) = Money(amount, Currency.CHF)
+        fun dollar(amount: BigDecimal) = Money(amount, Currency.USD)
+        fun franc(amount: BigDecimal) = Money(amount, Currency.CHF)
     }
 
     enum class Currency() {
