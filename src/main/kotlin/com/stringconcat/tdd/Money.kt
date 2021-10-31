@@ -16,7 +16,15 @@ open class Money(
     }
 
     operator fun plus(money: Money): Money {
-        return money(amount + money.amount, money.currency)
+        return money(amount + money.amount, this.currency)
+    }
+
+    fun plus(money: Money, rate: Int): Money {
+        if (money.currency == this.currency) {
+            plus(money)
+        }
+
+        return money(amount + money.toDollar(rate).amount, this.currency)
     }
 
     override fun toString(): String {

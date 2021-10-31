@@ -106,6 +106,6 @@ internal class MoneyTest {
         val francs = Money.franc(4)
         val expectedDollarsResult = Money.dollar(4)
 
-        dollars.plus(francs) shouldBe expectedDollarsResult
+        dollars.plus(francs, 2) shouldBe expectedDollarsResult
     }
 }
