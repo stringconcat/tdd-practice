@@ -51,16 +51,6 @@ internal class MoneyTest {
     }
 
     @Test
-    fun `4 CHF is 2 USD if rate 2 to 1`() {
-        Money.franc(4).toDollar(rate = 2) shouldBe (Money.dollar(2))
-    }
-
-    @Test
-    fun `5 USD to USD = 5 USD`() {
-        Money.dollar(5).toDollar(1) shouldBe (Money.dollar(5))
-    }
-
-    @Test
     fun `2 multiply 5 CHF is 10 CHF`() {
         Money.franc(5) * 2 shouldBe Money.franc(10)
     }
@@ -98,14 +88,5 @@ internal class MoneyTest {
     @Test
     fun `2 CHF + 2 CHF is 4 CHF`() {
         Money.franc(2) + Money.franc(2) shouldBe Money.franc(4)
-    }
-
-    @Test
-    fun `2 USD + 4 CHF = 4 USD (if rate 2 to 1)`() {
-        val dollars = Money.dollar(2)
-        val francs = Money.franc(4)
-        val expectedDollarsResult = Money.dollar(4)
-
-        dollars.plus(francs, 2) shouldBe expectedDollarsResult
     }
 }

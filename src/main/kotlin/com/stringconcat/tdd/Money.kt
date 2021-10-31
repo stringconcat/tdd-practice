@@ -19,26 +19,14 @@ open class Money(
         return money(amount + money.amount, this.currency)
     }
 
-    fun plus(money: Money, rate: Int): Money {
-        if (money.currency == this.currency) {
-            plus(money)
-        }
-
-        return money(amount + money.toDollar(rate).amount, this.currency)
-    }
-
     override fun toString(): String {
         return "$amount$currency"
-    }
-
-    fun toDollar(rate: Int): Money {
-        return dollar(amount/rate)
     }
 
     companion object  {
         fun dollar(amount: Int) = Money(amount, Currency.USD)
         fun franc(amount: Int) = Money(amount, Currency.CHF)
-        private fun money(amount: Int, currency: Currency): Money =
+        fun money(amount: Int, currency: Currency): Money =
             if (currency == Currency.USD) {
                 dollar(amount)
             } else {
