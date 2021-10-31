@@ -4,14 +4,19 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class BankTest {
+    val rates: Map<Pair<Currency, Currency>, Double> = mapOf(
+        Pair(Pair(Currency.CHF,Currency.USD), 2.0),
+        Pair(Pair(Currency.USD,Currency.CHF), 0.5)
+    )
+    
     @Test
     fun `4 CHF is 2 USD if rate 2 to 1`() {
-        Bank().convert(Money.franc(4), Currency.USD) shouldBe (Money.dollar(2))
+        Bank(rates).convert(Money.franc(4), Currency.USD) shouldBe (Money.dollar(2))
     }
 
     @Test
     fun `5 USD to USD = 5 USD`() {
-        Bank().convert(Money.dollar(5), Currency.USD) shouldBe (Money.dollar(5))
+        Bank(rates).convert(Money.dollar(5), Currency.USD) shouldBe (Money.dollar(5))
     }
 
     @Test
@@ -20,27 +25,27 @@ class BankTest {
         val francs = Money.franc(4)
         val expectedDollarsResult = Money.dollar(4)
 
-        val bank = Bank();
+        val bank = Bank(rates);
         bank.sum(dollars, francs) shouldBe expectedDollarsResult
     }
 
     @Test
     fun `2 CHF + 2 CHF is 4 CHF`() {
-        Bank().sum(Money.franc(2), Money.franc(2)) shouldBe Money.franc(4)
+        Bank(rates).sum(Money.franc(2), Money.franc(2)) shouldBe Money.franc(4)
     }
 
     @Test
     fun `2 USD + 2 USD is 4 USD`() {
-        Bank().sum(Money.dollar(2), Money.dollar(2)) shouldBe Money.dollar(4)
+        Bank(rates).sum(Money.dollar(2), Money.dollar(2)) shouldBe Money.dollar(4)
     }
 
     @Test
     fun `2 CHF + 4 USD = 4 CHF (if rate 1 to 2)`() {
         val francs = Money.franc(2)
         val dollars = Money.dollar(4)
-        val expectedFrancResult = Money.franc(4)
+        val expectedFrancResult = Money.franc(10)
 
-        val bank = Bank();
+        val bank = Bank(rates);
         bank.sum(francs, dollars) shouldBe expectedFrancResult
     }
 }

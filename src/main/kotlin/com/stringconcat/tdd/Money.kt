@@ -1,7 +1,7 @@
 package com.stringconcat.tdd
 
 open class Money(
-    val amount: Int,
+    val amount: Double,
     val currency: Currency
     ) {
 
@@ -20,13 +20,16 @@ open class Money(
     }
 
     companion object  {
-        fun dollar(amount: Int) = Money(amount, Currency.USD)
-        fun franc(amount: Int) = Money(amount, Currency.CHF)
-        fun money(amount: Int, currency: Currency): Money =
+        fun dollar(amount: Double) = Money(amount, Currency.USD)
+        fun franc(amount: Double) = Money(amount, Currency.CHF)
+        fun money(amount: Double, currency: Currency): Money =
             if (currency == Currency.USD) {
                 dollar(amount)
             } else {
                 franc(amount)
             }
+        fun dollar(amount: Int) = dollar(amount.toDouble())
+        fun franc(amount: Int) = franc(amount.toDouble())
+        fun money(amount: Int, currency: Currency): Money = money(amount.toDouble(), currency)
     }
 }

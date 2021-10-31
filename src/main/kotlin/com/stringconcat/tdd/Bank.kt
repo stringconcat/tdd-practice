@@ -2,13 +2,16 @@ package com.stringconcat.tdd
 
 import java.lang.IllegalArgumentException
 
-class Bank {
+class Bank (private val rates: Map<Pair<Currency, Currency>, Double>) {
+    private fun getRate(from: Currency, to: Currency): Double {
+        if (from == to) return 1.0;
 
-    private fun getRate(from: Currency, to: Currency): Int {
-        if (from == to) return 1;
+        val rateKey = Pair(from, to)
 
-        if (from == Currency.CHF && to == Currency.USD) {
-            return 2;
+        val rate = rates.get(rateKey)
+
+        if (rate != null) {
+            return rate
         }
 
         throw IllegalArgumentException()
