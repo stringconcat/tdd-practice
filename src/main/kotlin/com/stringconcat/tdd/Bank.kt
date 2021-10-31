@@ -19,11 +19,11 @@ class Bank {
         return Money(money.amount / rate, to)
     }
 
-    fun sum(money1: Money, money2: Money): Money {
-        if (money1.currency == money2.currency) {
-            money1.plus(money2);
+    fun sum(augend: Money, addend: Money): Money {
+        if (augend.currency == addend.currency) {
+            Money.money(augend.amount + addend.amount, augend.currency)
         }
-
-        return money1.plus(convert(money2, money1.currency));
+        val convertedAddend = convert(addend, augend.currency)
+        return Money.money(augend.amount + convertedAddend.amount, augend.currency)
     }
 }

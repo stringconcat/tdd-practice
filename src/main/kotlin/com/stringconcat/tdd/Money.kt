@@ -15,10 +15,6 @@ open class Money(
         return money(amount * multiplier, currency)
     }
 
-    operator fun plus(money: Money): Money {
-        return money(amount + money.amount, this.currency)
-    }
-
     override fun toString(): String {
         return "$amount$currency"
     }

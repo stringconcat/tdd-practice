@@ -23,4 +23,14 @@ class BankTest {
         val bank = Bank();
         bank.sum(dollars, francs) shouldBe expectedDollarsResult
     }
+
+    @Test
+    fun `2 CHF + 2 CHF is 4 CHF`() {
+        Bank().sum(Money.franc(2), Money.franc(2)) shouldBe Money.franc(4)
+    }
+
+    @Test
+    fun `2 USD + 2 USD is 4 USD`() {
+        Bank().sum(Money.dollar(2), Money.dollar(2)) shouldBe Money.dollar(4)
+    }
 }

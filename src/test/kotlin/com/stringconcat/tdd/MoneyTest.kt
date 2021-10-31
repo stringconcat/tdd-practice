@@ -46,11 +46,6 @@ internal class MoneyTest {
     }
 
     @Test
-    fun `2 USD + 2 USD is 4 USD`() {
-        Money.dollar(2) + Money.dollar(2) shouldBe Money.dollar(4)
-    }
-
-    @Test
     fun `2 multiply 5 CHF is 10 CHF`() {
         Money.franc(5) * 2 shouldBe Money.franc(10)
     }
@@ -83,10 +78,5 @@ internal class MoneyTest {
     @Test
     fun `2 CHF is not equal to any other object`() {
         Money.franc(2) shouldNotBe "any string"
-    }
-
-    @Test
-    fun `2 CHF + 2 CHF is 4 CHF`() {
-        Money.franc(2) + Money.franc(2) shouldBe Money.franc(4)
     }
 }
