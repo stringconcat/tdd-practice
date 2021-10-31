@@ -22,11 +22,24 @@ class Bank (private val rates: Map<Pair<Currency, Currency>, Double>) {
         return Money(money.amount / rate, to)
     }
 
-    fun sum(augend: Money, addend: Money): Money {
+    private fun sumInternal(augend: Money, addend: Money): Money {
         if (augend.currency == addend.currency) {
             Money.money(augend.amount + addend.amount, augend.currency)
         }
         val convertedAddend = convert(addend, augend.currency)
         return Money.money(augend.amount + convertedAddend.amount, augend.currency)
+    }
+
+    fun sum(augend: Money, vararg addends: Money): Money {
+        var result = augend;
+        if (addends.size == 0) {
+            return result
+        }
+
+        for (addend in addends) {
+            result = sumInternal(result, addend)
+        }
+
+        return result
     }
 }
