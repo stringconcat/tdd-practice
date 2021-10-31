@@ -36,15 +36,15 @@ class Bank (private val rates: Map<Pair<Currency, Currency>, Double>) {
             return result
         }
 
+        for (addend in addends) {
+            result = sumInternal(result, addend)
+        }
+
         val differenceCurrencies = addends
             .map { m -> m.currency }
             .toSet()
             .plus(augend.currency)
             .size > 1
-
-        for (addend in addends) {
-            result = sumInternal(result, addend)
-        }
 
         if (differenceCurrencies) {
             return convert(result, Currency.USD)

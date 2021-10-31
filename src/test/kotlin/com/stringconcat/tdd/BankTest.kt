@@ -46,7 +46,7 @@ class BankTest {
         val expectedFrancResult = Money.franc(10)
 
         val bank = Bank(rates);
-        bank.sum(francs, dollars) shouldBe expectedFrancResult
+        bank.convert(bank.sum(francs, dollars), Currency.CHF) shouldBe expectedFrancResult
     }
 
     @Test
