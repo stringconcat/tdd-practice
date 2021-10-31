@@ -48,4 +48,16 @@ class BankTest {
         val bank = Bank(rates);
         bank.sum(francs, dollars) shouldBe expectedFrancResult
     }
+
+    @Test
+    fun `2 USD + 4 CHF + 8 CHF + 2 USD = 10USD (if rate 2 to 1)`() {
+        val bank = Bank(rates);
+
+        bank.sum(
+            Money.dollar(2),
+            Money.franc(4),
+            Money.franc(8),
+            Money.dollar(2),
+        ) shouldBe Money.dollar(10)
+    }
 }
